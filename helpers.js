@@ -21,7 +21,12 @@ const generateBoard = (n) => {
  *         The resulting board or false if unchanged.
  */
 const addShip = (board, row, col) => {
-
+  if (board[row][col] !== null) {
+    return false
+  } else {
+    board[row][col] = 1;
+    return board
+  };
 };
 
 module.exports = {
