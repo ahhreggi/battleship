@@ -12,7 +12,7 @@ describe("generateBoard", () => {
     const expected = [];
     assert.deepEqual(output, expected);
   });
-  it("should return an array of 3 arrays each with 3 null values given n = 3", () => {
+  it("should return an array of 3 arrays, each with 3 null values, given n = 3", () => {
     const output = generateBoard(3);
     const expected = [
       [null, null, null],

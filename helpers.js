@@ -50,7 +50,7 @@ const addShip = (playerBoard, coords) => {
 /**
  * Given a player's map, returns a new board with given coordinates set to 1 or 0 if the
  * same coordinate on the enemy's board has a value of 0 or null, respectively (hit or miss).
- * Returns false if the coordinate has already been attacked.
+ * Returns false if the coordinate had already been attacked.
  * @param  {Array.<[number|null]>} playerMap - The player's map.
  * @param  {Array.<[number|null]>} enemyBoard - The enemy's board.
  * @param  {Array.<number, number>} coords - The X and Y coordinates.
