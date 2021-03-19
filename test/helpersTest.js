@@ -3,7 +3,8 @@ const {
   generateBoard,
   copyBoard,
   addShip,
-  attackingMap
+  attackingMap,
+  defendingBoard
 } = require("../helpers");
 
 describe("generateBoard", () => {
@@ -66,24 +67,55 @@ describe("addShip", () => {
 });
 
 describe("attackingMap", () => {
-  it("should set the target to 0 if the attack missed (was null)", () => {
-    const map = [[null]];
-    const board = [[null]];
-    const output = attackingMap(map, board, [0, 0]);
-    const expected = [[0]];
-    assert.deepEqual(output, expected);
-  });
-  it("should set the target to 1 if an enemy ship was hit (was 0)", () => {
-    const map = [[null]];
-    const board = [[0]];
-    const output = attackingMap(map, board, [0, 0]);
+  it("should set the target to 1 if the outgoing attack hit a ship (was 0)", () => {
+    const playerMap = [[null]];
+    const enemyBoard = [[0]];
+    const output = attackingMap(playerMap, enemyBoard, [0, 0]);
     const expected = [[1]];
     assert.deepEqual(output, expected);
   });
-  it("should return false if the target is already 1", () => {
-    const map = [[1]];
-    const board = [[undefined]];
-    const output = attackingMap(map, board, [0, 0]);
+  it("should set the target to 0 if the outgoing attack missed (was null)", () => {
+    const playerMap = [[null]];
+    const enemyBoard = [[null]];
+    const output = attackingMap(playerMap, enemyBoard, [0, 0]);
+    const expected = [[0]];
+    assert.deepEqual(output, expected);
+  });
+  it("should return false if the target had already been attacked (hit)", () => {
+    const playerMap = [[1]];
+    const enemyBoard = [[1]];
+    const output = attackingMap(playerMap, enemyBoard, [0, 0]);
+    assert.isFalse(output);
+  });
+  it("should return false if the target had already been attacked (miss)", () => {
+    const playerMap = [[1]];
+    const enemyBoard = [[-1]];
+    const output = attackingMap(playerMap, enemyBoard, [0, 0]);
     assert.isFalse(output);
   });
 });
+
+describe("defendingBoard", () => {
+  it("should set the target to 1 if the incoming attack hit a ship (was 0)", () => {
+    const playerBoard = [[0]];
+    const output = defendingBoard(playerBoard, [0, 0]);
+    const expected = [[1]];
+    assert.deepEqual(output, expected);
+  });
+  it("should set the target to -1 if the incoming attack missed (was null)", () => {
+    const playerBoard = [[null]];
+    const output = defendingBoard(playerBoard, [0, 0]);
+    const expected = [[-1]];
+    assert.deepEqual(output, expected);
+  });
+  it("should return false if the target had already been attacked (hit)", () => {
+    const playerBoard = [[1]];
+    const output = defendingBoard(playerBoard, [0, 0]);
+    assert.isFalse(output);
+  });
+  it("should return false if the target had already been attacked (miss)", () => {
+    const playerBoard = [[-1]];
+    const output = defendingBoard(playerBoard, [0, 0]);
+    assert.isFalse(output);
+  });
+})
