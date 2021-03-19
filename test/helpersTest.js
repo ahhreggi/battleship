@@ -1,7 +1,8 @@
 const { assert } = require("chai");
 const {
   generateBoard,
-  addShip
+  addShip,
+  attackingMap
 } = require("../helpers");
 
 describe("generateBoard", () => {
@@ -22,13 +23,13 @@ describe("generateBoard", () => {
 });
 
 describe("addShip", () => {
-  it("should add the ship if the current value at a coordinate is null", () => {
+  it("should add the ship if the target is null", () => {
     const board = [
       [null, null, null],
       [null, null, null],
       [null, null, null]
     ];
-    const output = addShip(board, 1, 1);
+    const output = addShip(board, [1, 1]);
     const expected = [
       [null, null, null],
       [null, 0, null],
@@ -36,18 +37,30 @@ describe("addShip", () => {
     ];
     assert.deepEqual(output, expected);
   });
-  it("should return false if the current value at a coordinate is 0", () => {
+  it("should return false if the target is 0", () => {
     const board = [
       [null, null, null],
       [null, 0, null],
       [null, null, null]
     ];
-    const output = addShip(board, 1, 1);
+    const output = addShip(board, [1, 1]);
     assert.isFalse(output);
   });
   it("should not modify the original board when adding a ship", () => {
     const board = [[null]];
-    const shipAdded = addShip(board, 0, 0);
+    const shipAdded = addShip(board, [0, 0]);
     assert.notDeepEqual(board, shipAdded);
+  });
+});
+
+describe("attackingMap", () => {
+  it("should set the target to 0 if the attack missed (null)", () => {
+
+  });
+  it("should set the target to 1 if an enemy ship was hit (0)", () => {
+
+  });
+  it("should set the target to 1 if an enemy ship was hit (0)", () => {
+
   });
 });

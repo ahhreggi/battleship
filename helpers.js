@@ -22,14 +22,14 @@ const generateBoard = (n) => {
 };
 
 /**
- * Given a player's board, returns a new board with a given coordinate value set to 0,
+ * Given a player's board, returns a new board with given coordinates value set to 0,
  * or false if the existing value is not null (a ship has already been placed there).
  * @param  {Array.<[number|null]>} playerBoard - The player's board.
- * @param  {number} row - The row index (X coordinate).
- * @param  {number} col - The column index (Y coordinate).
+ * @param  {Array.<number, number>} coords - The X and Y coordinates.
  * @return {Array.<[number|null]>|boolean} - The player's resulting board or false if unchanged.
  */
-const addShip = (playerBoard, row, col) => {
+const addShip = (playerBoard, coords) => {
+  const [row, col] = coords;
   if (playerBoard[row][col] !== null) {
     return false;
   }
@@ -39,20 +39,21 @@ const addShip = (playerBoard, row, col) => {
 };
 
 /**
- * Given a player's map, returns a new board with a given coordinate set to 1 or 0 if the
+ * Given a player's map, returns a new board with given coordinates set to 1 or 0 if the
  * same coordinate on the enemy's board has a value of 0 or null, respectively (hit or miss).
+ * Returns false if the coordinate has already been attacked.
  * @param  {Array.<[number|null]>} playerMap - The player's map.
  * @param  {Array.<[number|null]>} enemyBoard - The enemy's board.
- * @param  {number} row - The row index (X coordinate).
- * @param  {number} col - The column index (Y coordinate).
+ * @param  {Array.<number, number>} coords - The X and Y coordinates.
  * @return {Array.<[number|null]>|boolean} - The player's resulting map or false if unchanged.
  */
-const attackingMap = (playerMap, enemyBoard, row, col) => {
+const attackingMap = (playerMap, enemyBoard, coords) => {
 
 };
 
 
 module.exports = {
   generateBoard,
-  addShip
+  addShip,
+  attackingMap
 };
