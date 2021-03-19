@@ -54,4 +54,9 @@ describe("addShip", () => {
     const output = addShip(board, 1, 1);
     assert.isFalse(output);
   });
+  it("should not modify the original board when adding a ship", () => {
+    const board = [[null]];
+    const shipAdded = addShip(board, 0, 0);
+    assert.notDeepEqual(board, shipAdded);
+  });
 });
