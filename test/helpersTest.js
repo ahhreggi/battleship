@@ -31,7 +31,7 @@ describe("addShip", () => {
     const output = addShip(board, 1, 1);
     const expected = [
       [null, null, null],
-      [null, 1, null],
+      [null, 0, null],
       [null, null, null],
     ];
     assert.deepEqual(output, expected);
@@ -40,15 +40,6 @@ describe("addShip", () => {
     const board = [
       [null, null, null],
       [null, 0, null],
-      [null, null, null]
-    ];
-    const output = addShip(board, 1, 1);
-    assert.isFalse(output);
-  });
-  it("should return false if the current value at a coordinate is 1", () => {
-    const board = [
-      [null, null, null],
-      [null, 1, null],
       [null, null, null]
     ];
     const output = addShip(board, 1, 1);
