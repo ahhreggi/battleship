@@ -22,6 +22,15 @@ const generateBoard = (n) => {
 };
 
 /**
+ * Returns a deep copy of a board (2-dimensional array).
+ * @param  {Array.<Array>} board - The nested array to clone.
+ * @return {Array.<Array>} A deep clone of the nested array.
+ */
+const copyBoard = (board) => {
+  return board.map(array => array.slice());
+};
+
+/**
  * Given a player's board, returns a new board with given coordinates value set to 0,
  * or false if the existing value is not null (a ship has already been placed there).
  * @param  {Array.<[number|null]>} playerBoard - The player's board.
@@ -64,6 +73,7 @@ const attackingMap = (playerMap, enemyBoard, coords) => {
 
 module.exports = {
   generateBoard,
+  copyBoard,
   addShip,
   attackingMap
 };

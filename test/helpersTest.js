@@ -1,6 +1,7 @@
 const { assert } = require("chai");
 const {
   generateBoard,
+  copyBoard,
   addShip,
   attackingMap
 } = require("../helpers");
@@ -19,6 +20,16 @@ describe("generateBoard", () => {
       [null, null, null],
     ];
     assert.deepEqual(output, expected);
+  });
+});
+
+describe("copyBoard", () => {
+  it("should return a deep copy of a board", () => {
+    const board1 = [[0, 0, 1]];
+    const board2 = copyBoard(board1);
+    board2[0][0] = 1;
+    const expected = [[0, 0, 1]];
+    assert.deepEqual(board1, expected);
   });
 });
 
