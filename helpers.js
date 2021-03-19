@@ -1,10 +1,12 @@
 /**
- * Returns an empty 10x10 board.
- * @return {Array.<Array.<number>>}
- *         A 2-dimensional array of zeroes, representing 10 rows and 10 columns.
+ * Returns an empty n * n board.
+ * @param  {number} n
+ *         The number of rows and columns.
+ * @return {Array.<Array.<null>>}
+ *         A 2-dimensional array of null values representing n rows and n columns.
  */
-const generateBoard = () => {
-
+const generateBoard = (n) => {
+  return new Array(n).fill(new Array(n).fill(null));
 };
 
 module.exports = {

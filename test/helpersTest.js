@@ -4,9 +4,9 @@ const {
 } = require("../helpers");
 
 describe("generateBoard", () => {
-  it("should return [[]] given n = 0", () => {
+  it("should return an empty erray given n = 0", () => {
     const actual = generateBoard(0);
-    const expected = [[]];
+    const expected = [];
     assert.deepEqual(actual, expected);
   });
   it("should return an array of 3 arrays each with 3 null values given n = 3", () => {
