@@ -6,3 +6,7 @@
 const generateBoard = () => {
 
 };
+
+module.exports = {
+  generateBoard
+};
