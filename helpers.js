@@ -58,18 +58,19 @@ const addShip = (playerBoard, coords) => {
  */
 const attackingMap = (playerMap, enemyBoard, coords) => {
   const [row, col] = coords;
+  if (playerMap[row][col] === 1) return false;
   let hitOrMiss;
-  if (playerMap[row][col] === 1) { // already attacked
-    return false;
-  } else if (enemyBoard[row][col] === null) { // miss
-    hitOrMiss = 0;
-  } else { // hit
+  if (enemyBoard[row][col] === 0) { // hit
     hitOrMiss = 1;
+  } else { // miss
+    hitOrMiss = 0;
   }
   const newMap = playerMap.map(row => row.slice());
   newMap[row][col] = hitOrMiss;
   return newMap;
 };
+
+const defendingBoard = (playerBoard, coords)
 
 module.exports = {
   generateBoard,
