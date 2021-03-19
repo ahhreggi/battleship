@@ -48,9 +48,19 @@ const addShip = (playerBoard, coords) => {
  * @return {Array.<[number|null]>|boolean} - The player's resulting map or false if unchanged.
  */
 const attackingMap = (playerMap, enemyBoard, coords) => {
-
+  const [row, col] = coords;
+  let hitOrMiss;
+  if (playerMap[row][col] === 1) { // already attacked
+    return false;
+  } else if (enemyBoard[row][col] === null) { // miss
+    hitOrMiss = 0;
+  } else { // hit
+    hitOrMiss = 1;
+  }
+  const newMap = playerMap.map(row => row.slice());
+  newMap[row][col] = hitOrMiss;
+  return newMap;
 };
-
 
 module.exports = {
   generateBoard,

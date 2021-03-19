@@ -48,19 +48,31 @@ describe("addShip", () => {
   });
   it("should not modify the original board when adding a ship", () => {
     const board = [[null]];
-    const shipAdded = addShip(board, [0, 0]);
-    assert.notDeepEqual(board, shipAdded);
+    addShip(board, [0, 0]);
+    const expected = [[null]];
+    assert.deepEqual(board, expected);
   });
 });
 
 describe("attackingMap", () => {
-  it("should set the target to 0 if the attack missed (null)", () => {
-
+  it("should set the target to 0 if the attack missed (was null)", () => {
+    const map = [[null]];
+    const board = [[null]];
+    const output = attackingMap(map, board, [0, 0]);
+    const expected = [[0]];
+    assert.deepEqual(output, expected);
   });
-  it("should set the target to 1 if an enemy ship was hit (0)", () => {
-
+  it("should set the target to 1 if an enemy ship was hit (was 0)", () => {
+    const map = [[null]];
+    const board = [[0]];
+    const output = attackingMap(map, board, [0, 0]);
+    const expected = [[1]];
+    assert.deepEqual(output, expected);
   });
-  it("should set the target to 1 if an enemy ship was hit (0)", () => {
-
+  it("should return false if the target is already 1", () => {
+    const map = [[1]];
+    const board = [[undefined]];
+    const output = attackingMap(map, board, [0, 0]);
+    assert.isFalse(output);
   });
 });
