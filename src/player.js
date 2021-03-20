@@ -35,8 +35,7 @@ class Board {
 
 class Map extends Board {
   toString() {
-    const map = getMap(this.grid)
-    return map
+    return boardToStr(getLabels(getMap(this.grid)))
   }
 }
 
