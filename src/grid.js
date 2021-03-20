@@ -39,6 +39,12 @@ class Map extends Grid {
   toString() {
     return boardToStr(getLabels(getMap(this.grid)));
   }
+
+  // Registers an outgoing attack.
+  sendShot(board, coordinates) {
+    this.grid = attackingMap(this.grid, board.grid, coordinates);
+  }
+  
 }
 
 
@@ -77,4 +83,9 @@ p1.addShip([0, 4]); // A 0
 p1.receiveShot([0, 0]);
 p1.receiveShot([1, 0]);
 p1.receiveShot([4, 6]);
-console.log(p1.toString());
+
+const m1 = new Map(10);
+m1.sendShot(p1, [0, 0])
+
+console.log(m1.toString());
+// console.log(p1.toString());
