@@ -2,15 +2,15 @@
  * A player sees two boards: their own and a map of their opponent's
  *
  * Player's board (starts as null with 0s for ship placements):
- *    null = empty space
- *    0 = ship
- *    1 = enemy attack hit
- *    -1 = enemy attack miss
+ *    null = empty space = " "
+ *    0 = ship = "O"
+ *    1 = enemy attack hit = "X"
+ *    -1 = enemy attack miss = "-"
  *
  * Player's map of the opponent's board (starts as null):
- *    null = unattacked tile
- *    0 = player attack miss
- *    1 = player attack hit
+ *    null = unattacked tile = " "
+ *    0 = player attack miss = "-"
+ *    1 = player attack hit = "X"
  */
 
 /**
@@ -49,7 +49,7 @@ const addShip = (playerBoard, coords) => {
 };
 
 /**
- * Given a player's map, returns a new board with given coordinates set to 1 or 0 if the
+ * Given a player's map, returns a new map with given coordinates set to 1 or 0 if the
  * same coordinate on the enemy's board has a value of 0 or null, respectively (hit or miss).
  * Returns false if the coordinate had already been attacked.
  * @param  {Array.<[number|null]>} playerMap - The player's map.
@@ -75,8 +75,9 @@ const attackingMap = (playerMap, enemyBoard, coords) => {
  * Given a player's board, returns a new board with given coordinates set to 1 or -1 if the
  * incoming attack coordinates has a value of 0 or null, respectively (hit or miss).
  * Returns false if the coordinate had already been attacked.
- * @param {Array.<[number|null]>} playerBoard - The player's board.
+ * @param  {Array.<[number|null]>} playerBoard - The player's board.
  * @param  {Array.<number, number>} coords - The X and Y coordinates of an incoming attack.
+ * @return {Array.<[number|null]>|boolean} - The player's resulting board or false if unchanged.
  */
 const defendingBoard = (playerBoard, coords) => {
   const [row, col] = coords;
@@ -93,10 +94,25 @@ const defendingBoard = (playerBoard, coords) => {
   return newBoard;
 };
 
+/**
+ * Given a player's map, returns a new board with values replaced by strings representing the
+ * visual states of each tile.
+ *   - Unattacked tile (null) => " "
+ *   - Player attack miss (0) => "-"
+ *   - Player attack hit (1)  => "X"
+ * @param  {Array.<[number|null]>} playerMap - The player's map.
+ * @return {Array.<[string]>} - The resulting visual map.
+ */
+const getMap = () => {
+
+};
+
+
 module.exports = {
   generateBoard,
   copyBoard,
   addShip,
   attackingMap,
-  defendingBoard
+  defendingBoard,
+  getMap
 };

@@ -4,7 +4,8 @@ const {
   copyBoard,
   addShip,
   attackingMap,
-  defendingBoard
+  defendingBoard,
+  getMap
 } = require("../helpers");
 
 describe("generateBoard", () => {
@@ -117,5 +118,30 @@ describe("defendingBoard", () => {
     const playerBoard = [[-1]];
     const output = defendingBoard(playerBoard, [0, 0]);
     assert.isFalse(output);
+  });
+});
+
+// *   - Unattacked tile (null) => " "
+// *   - Player attack miss (0) => "-"
+// *   - Player attack hit (1)  => "X"
+
+describe("getMap", () => {
+  it("should convert null to ' '", () => {
+    const playerMap = [[null]];
+    const output = getMap(playerMap);
+    const expected = [[" "]];
+    assert.equal(output, expected);
+  });
+  it("should convert 0 to '-'", () => {
+    const playerMap = [[0]];
+    const output = getMap(playerMap);
+    const expected = [["-"]];
+    assert.equal(output, expected);
+  });
+  it("should convert 1 to 'X'", () => {
+    const playerMap = [[1]];
+    const output = getMap(playerMap);
+    const expected = [["X"]];
+    assert.equal(output, expected);
   });
 });
