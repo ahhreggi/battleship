@@ -9,8 +9,8 @@
  *
  * Player's map of the opponent's board (starts as null):
  *    null = unattacked tile = " "
- *    0 = player attack miss = "-"
  *    1 = player attack hit = "X"
+ *    0 = player attack miss = "-"
  */
 
 /**
@@ -98,13 +98,26 @@ const defendingBoard = (playerBoard, coords) => {
  * Given a player's map, returns a new board with values replaced by strings representing the
  * visual states of each tile.
  *   - Unattacked tile (null) => " "
- *   - Player attack miss (0) => "-"
  *   - Player attack hit (1)  => "X"
+ *   - Player attack miss (0) => "-"
  * @param  {Array.<[number|null]>} playerMap - The player's map.
  * @return {Array.<[string]>} - The resulting visual map.
  */
-const getMap = () => {
-
+const getMap = (playerMap) => {
+  const visualMap = copyBoard(playerMap);
+  for (const row in visualMap) {
+    for (const col in row) {
+      let current = visualMap[row][col];
+      if (current === null) {
+        visualMap[row][col] = " ";
+      } else if (current) {
+        visualMap[row][col] = "X";
+      } else {
+        visualMap[row][col] = "-";
+      }
+    }
+  }
+  return visualMap;
 };
 
 

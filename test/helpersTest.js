@@ -121,27 +121,23 @@ describe("defendingBoard", () => {
   });
 });
 
-// *   - Unattacked tile (null) => " "
-// *   - Player attack miss (0) => "-"
-// *   - Player attack hit (1)  => "X"
-
 describe("getMap", () => {
   it("should convert null to ' '", () => {
     const playerMap = [[null]];
     const output = getMap(playerMap);
     const expected = [[" "]];
-    assert.equal(output, expected);
-  });
-  it("should convert 0 to '-'", () => {
-    const playerMap = [[0]];
-    const output = getMap(playerMap);
-    const expected = [["-"]];
-    assert.equal(output, expected);
+    assert.deepEqual(output, expected);
   });
   it("should convert 1 to 'X'", () => {
     const playerMap = [[1]];
     const output = getMap(playerMap);
     const expected = [["X"]];
-    assert.equal(output, expected);
+    assert.deepEqual(output, expected);
+  });
+  it("should convert 0 to '-'", () => {
+    const playerMap = [[0]];
+    const output = getMap(playerMap);
+    const expected = [["-"]];
+    assert.deepEqual(output, expected);
   });
 });
