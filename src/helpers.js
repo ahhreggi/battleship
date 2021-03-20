@@ -117,7 +117,7 @@ const getMap = (playerMap, mapKey = visualKeys.map) => {
  *   - Enemy attack hit (1)   => "X"
  *   - Enemy attack miss (-1) => "-"
  * @param  {Array.<[number|null]>} playerBoard - The player's board.
- *  * @param  {Object.<string>} boardKey - An object containing characters to represent board tile states.
+ * @param  {Object.<string>} boardKey - An object containing characters to represent board tile states.
  * @return {Array.<[string]>} - The resulting visual board.
  */
 const getBoard = (playerBoard, boardKey = visualKeys.board) => {
@@ -139,6 +139,15 @@ const getBoard = (playerBoard, boardKey = visualKeys.board) => {
   return visualBoard;
 };
 
+/**
+ * Given a board, returns a new board with an extra row and column
+ * containing row (letter) and column (number) values.
+ * @param  {Array.<[number|null]>} board - The player's map or board.
+ * @return {Array.<[string|number|null]>} - The map or board with coordinates.
+ */
+const getLabels = () => {
+
+};
 
 module.exports = {
   generateBoard,
