@@ -30,7 +30,7 @@ class Grid {
 
 class Map extends Grid {
 
-  // Returns a visualized grid.
+  // Returns a visualized map.
   visual() {
     return getMap(this.grid);
   }
@@ -41,15 +41,16 @@ class Map extends Grid {
   }
 }
 
+
 class Board extends Grid {
 
   // Adds a ship at the given coordinates.
   // coordinates = [x, y]
   addShip(coordinates) {
-    this.grid = addShip(this.grid, coordinates);
+    this.grid = addShip(this.grid, coordinates)
   }
 
-  // Returns a visualized grid.
+  // Returns a visualized map.
   visual() {
     return getBoard(this.grid);
   }
@@ -68,4 +69,4 @@ p1.addShip([0, 1]); // A 0
 p1.addShip([0, 2]); // A 0
 p1.addShip([0, 3]); // A 0
 p1.addShip([0, 4]); // A 0
-console.log(p1.toString());
+console.log(p1.visual());
