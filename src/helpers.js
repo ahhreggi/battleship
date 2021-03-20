@@ -163,18 +163,15 @@ const getLabels = (board) => {
 
 /** Returns a string representation of a board.
   * @param {Array.<[string|number|null]>} board - The player's map or board.
-  * @param {boolean} labels - Whether or not to include row/column labels.
+  * @param {string} - The resulting string representation.
   */
-const boardToStr = (board, labels = false) => {
+const boardToStr = (board) => {
   let grid = board;
-  if (labels) {
-    grid = getLabels(board);
-  }
   let str = "";
   for (const row of grid) {
     str += `${row.join("")}\n`;
   }
-  return (labels ? " " : "") + str.trim();
+  return str.trim();
 };
 
 module.exports = {
