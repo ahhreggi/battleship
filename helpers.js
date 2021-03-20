@@ -80,9 +80,10 @@ const attackingMap = (playerMap, enemyBoard, coords) => {
  */
 const defendingBoard = (playerBoard, coords) => {
   const [row, col] = coords;
-  if (playerBoard[row][col] === 1 || playerBoard[row][col] === -1) return false;
+  const target = playerBoard[row][col];
+  if (target === 1 || target === -1) return false;
   let hitOrMiss;
-  if (playerBoard[row][col] === 0) {
+  if (target === 0) {
     hitOrMiss = 1;
   } else {
     hitOrMiss = -1;
