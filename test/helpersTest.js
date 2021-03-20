@@ -5,7 +5,8 @@ const {
   addShip,
   attackingMap,
   defendingBoard,
-  getMap
+  getMap,
+  getBoard
 } = require("../helpers");
 
 describe("generateBoard", () => {
@@ -137,6 +138,33 @@ describe("getMap", () => {
   it("should convert 0 to '-'", () => {
     const playerMap = [[0]];
     const output = getMap(playerMap);
+    const expected = [["-"]];
+    assert.deepEqual(output, expected);
+  });
+});
+
+describe("getBoard", () => {
+  it("should convert null to ' '", () => {
+    const playerBoard = [[null]];
+    const output = getBoard(playerBoard);
+    const expected = [[" "]];
+    assert.deepEqual(output, expected);
+  });
+  it("should convert 0 to 'O'", () => {
+    const playerBoard = [[0]];
+    const output = getBoard(playerBoard);
+    const expected = [["O"]];
+    assert.deepEqual(output, expected);
+  });
+  it("should convert 1 to 'X'", () => {
+    const playerBoard = [[1]];
+    const output = getBoard(playerBoard);
+    const expected = [["X"]];
+    assert.deepEqual(output, expected);
+  });
+  it("should convert -1 to '-'", () => {
+    const playerBoard = [[-1]];
+    const output = getBoard(playerBoard);
     const expected = [["-"]];
     assert.deepEqual(output, expected);
   });
