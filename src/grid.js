@@ -30,6 +30,10 @@ class Grid {
 
 class Map extends Grid {
 
+  constructor() {
+    this.attackLog = [];
+  }
+
   // Returns a visualized map.
   visual() {
     return getMap(this.grid);
@@ -43,12 +47,17 @@ class Map extends Grid {
   // Registers an outgoing attack.
   sendShot(board, coordinates) {
     this.grid = attackingMap(this.grid, board.grid, coordinates);
+    this.attackLog.push(coordinates);
   }
   
 }
 
 
 class Board extends Grid {
+
+  constructor() {
+    this.defenseLog = [];
+  }
 
   // Adds a ship at the given coordinates.
   // coordinates = [x, y]
@@ -69,6 +78,7 @@ class Board extends Grid {
   // Registers incoming attack.
   receiveShot(coordinates) {
     this.grid = defendingBoard(this.grid, coordinates);
+    this.defenseLog.push(coordinates);
   }
 }
 
