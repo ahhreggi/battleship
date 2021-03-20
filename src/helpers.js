@@ -162,7 +162,7 @@ const getLabels = (board) => {
 };
 
 /** Log each row of a board to the console.
-*   @param {Array.<[number|null]>} board - The player's map or board.
+*   @param {Array.<[string|number|null]>} board - The player's map or board.
 */
 const printBoard = (board) => {
   for (const row of board) {

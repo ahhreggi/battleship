@@ -97,6 +97,13 @@ describe("attackingMap", () => {
     const output = attackingMap(playerMap, enemyBoard, [0, 0]);
     assert.isFalse(output);
   });
+  it("should not modify the original player map", () => {
+    const playerMap = [[null]];
+    const enemyBoard = [[null]];
+    attackingMap(playerMap, enemyBoard, [0, 0]);
+    const expected = [[null]];
+    assert.deepEqual(playerMap, expected);
+  });
 });
 
 describe("defendingBoard", () => {
@@ -122,6 +129,12 @@ describe("defendingBoard", () => {
     const output = defendingBoard(playerBoard, [0, 0]);
     assert.isFalse(output);
   });
+  it("should not modify the original player board", () => {
+    const playerBoard = [[null]];
+    defendingBoard(playerBoard, [0, 0]);
+    const expected = [[null]];
+    assert.deepEqual(playerBoard, expected);
+  });
 });
 
 describe("getMap", () => {
@@ -142,6 +155,12 @@ describe("getMap", () => {
     const output = getMap(playerMap);
     const expected = [["-"]];
     assert.deepEqual(output, expected);
+  });
+  it("should not modify the original player map", () => {
+    const playerMap = [[null]];
+    getMap(playerMap);
+    const expected = [[null]];
+    assert.deepEqual(playerMap, expected);
   });
 });
 
@@ -170,22 +189,28 @@ describe("getBoard", () => {
     const expected = [["-"]];
     assert.deepEqual(output, expected);
   });
+  it("should not modify the original player board", () => {
+    const playerBoard = [[null]];
+    getBoard(playerBoard);
+    const expected = [[null]];
+    assert.deepEqual(playerBoard, expected);
+  });
 });
 
 describe("getLabels", () => {
-  // it("should return a 3x3 board given a 2x2 board", () => {
-  //   const board = [
-  //     [null, null],
-  //     [null, null]
-  //   ];
-  //   const output = getLabels(board);
-  //   const numRows = output.length;
-  //   const numCols = output[0].length;
-  //   const expectedRows = board.length + 1;
-  //   const expectedCols = board[0].length + 1;
-  //   assert.deepEqual([numRows, numCols], [expectedRows, expectedCols]);
-  // });
-  it("should return a board with letters for each row and numbers for each column (except at (0, 0) which should be ' ')", () => {
+  it("should return a 3x3 board given a 2x2 board", () => {
+    const board = [
+      [null, null],
+      [null, null]
+    ];
+    const output = getLabels(board);
+    const numRows = output.length;
+    const numCols = output[0].length;
+    const expectedRows = board.length + 1;
+    const expectedCols = board[0].length + 1;
+    assert.deepEqual([numRows, numCols], [expectedRows, expectedCols]);
+  });
+  it("should return a board with letters for each row and numbers for each column, except at (0, 0) which should be ' '", () => {
     const board = [
       [".", "."],
       [".", "."]
