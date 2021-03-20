@@ -168,14 +168,14 @@ const getLabels = (board) => {
 const boardToStr = (board, labels = false) => {
   let grid = board;
   if (labels) {
-    grid = this.labeled(board);
+    grid = getLabels(board);
   }
   let str = "";
   for (const row of grid) {
-    str += `${row.join("")}\n`
+    str += `${row.join("")}\n`;
   }
-  return str
-}
+  return (labels ? " " : "") + str.trim();
+};
 
 module.exports = {
   generateBoard,

@@ -1,4 +1,4 @@
-const { 
+const {
   generateBoard,
   copyBoard,
   getLabels,
@@ -7,14 +7,14 @@ const {
 
 class Board {
   constructor(size) {
-    this.size = size
+    this.size = size;
     this.grid = generateBoard(size);
-  };
+  }
 
   // Returns a deep copy of the board.
   deepCopy() {
     return copyBoard(this.grid);
-  };
+  }
 
   labeled() {
     return getLabels(this.grid);

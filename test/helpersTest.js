@@ -7,7 +7,8 @@ const {
   defendingBoard,
   getMap,
   getBoard,
-  getLabels
+  getLabels,
+  boardToStr
 } = require("../src/helpers");
 
 describe("generateBoard", () => {
@@ -221,5 +222,26 @@ describe("getLabels", () => {
       ["B", ".", "."],
     ];
     assert.deepEqual(output, expected);
+  });
+});
+
+describe("boardToStr", () => {
+  it("should return the correct string representation of a board without labels", () => {
+    const board = [
+      [".", "."],
+      [".", "."],
+    ];
+    const output = boardToStr(board);
+    const expected = "..\n..";
+    assert.equal(output, expected);
+  });
+  it("should return the correct string representation of a board with labels", () => {
+    const board = [
+      [".", "."],
+      [".", "."],
+    ];
+    const output = boardToStr(board, true);
+    const expected = " 12\nA..\nB..";
+    assert.equal(output, expected);
   });
 });
