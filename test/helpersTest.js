@@ -173,34 +173,35 @@ describe("getMap", () => {
 });
 
 describe("getBoard", () => {
-  it("should convert null to '.' (unattacked)", () => {
+  const key = visualKeys.board;
+  it(`should convert null to ${key.default} (unattacked)`, () => {
     const playerBoard = [
       [null, null],
       [null, null]
     ];
     const output = getBoard(playerBoard);
     const expected = [
-      [".", "."],
-      [".", "."]
+      [key.default, key.default],
+      [key.default, key.default]
     ];
     assert.deepEqual(output, expected);
   });
-  it("should convert 0 to 'O' (ship)", () => {
+  it(`should convert 0 to ${key.ship} (ship)`, () => {
     const playerBoard = [[0]];
     const output = getBoard(playerBoard);
-    const expected = [["O"]];
+    const expected = [[key.ship]];
     assert.deepEqual(output, expected);
   });
-  it("should convert 1 to 'X' (enemy attack hit)", () => {
+  it(`should convert 1 to ${key.hit} (enemy attack hit)`, () => {
     const playerBoard = [[1]];
     const output = getBoard(playerBoard);
-    const expected = [["X"]];
+    const expected = [[key.hit]];
     assert.deepEqual(output, expected);
   });
-  it("should convert -1 to '-' (enemy attack miss)", () => {
+  it(`should convert -1 to ${key.miss} (enemy attack miss)`, () => {
     const playerBoard = [[-1]];
     const output = getBoard(playerBoard);
-    const expected = [["-"]];
+    const expected = [[key.miss]];
     assert.deepEqual(output, expected);
   });
   it("should not modify the original player board", () => {
