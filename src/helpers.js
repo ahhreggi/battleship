@@ -47,10 +47,11 @@ const addShip = (playerBoard, coords) => {
 const attackingMap = (playerMap, enemyBoard, coords) => {
   const [row, col] = coords;
   if (playerMap[row][col] === 1) return false;
+  const target = enemyBoard[row][col];
   let hitOrMiss;
-  if (enemyBoard[row][col] === 0) { // hit
+  if (target === 0) { // hit
     hitOrMiss = 1;
-  } else { // miss
+  } else if (target === null) { // miss
     hitOrMiss = 0;
   }
   const newMap = copyBoard(playerMap);
@@ -73,7 +74,7 @@ const defendingBoard = (playerBoard, coords) => {
   let hitOrMiss;
   if (target === 0) {
     hitOrMiss = 1;
-  } else {
+  } else if (target === null) {
     hitOrMiss = -1;
   }
   const newBoard = copyBoard(playerBoard);
