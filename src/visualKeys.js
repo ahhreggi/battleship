@@ -14,12 +14,12 @@ module.exports = {
   map: {
     default: ".",
     hit: "H",
-    miss: "-"
+    miss: "M"
   },
   board: {
     default: ".",
-    ship: "O",
-    hit: "X",
-    miss: "-"
+    ship: "S",
+    hit: "H",
+    miss: "M"
   }
 };

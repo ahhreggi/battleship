@@ -36,7 +36,7 @@ class Map extends Grid {
   }
 
   // Returns a string representation of the map.
-  toString() {
+  show() {
     return boardToStr(getLabels(getMap(this.grid)));
   }
 
@@ -53,7 +53,7 @@ class Board extends Grid {
   // Adds a ship at the given coordinates.
   // coordinates = [x, y]
   addShip(coordinates) {
-    this.grid = addShip(this.grid, coordinates)
+    this.grid = addShip(this.grid, coordinates);
   }
 
   // Returns a visualized map.
@@ -62,7 +62,7 @@ class Board extends Grid {
   }
 
   // Returns a string representation of the board.
-  toString() {
+  show() {
     return boardToStr(getLabels(getBoard(this.grid)));
   }
 
@@ -80,12 +80,10 @@ p1.addShip([0, 1]); // A 0
 p1.addShip([0, 2]); // A 0
 p1.addShip([0, 3]); // A 0
 p1.addShip([0, 4]); // A 0
-p1.receiveShot([0, 0]);
-p1.receiveShot([1, 0]);
-p1.receiveShot([4, 6]);
 
 const m1 = new Map(10);
-m1.sendShot(p1, [0, 0])
+m1.sendShot(p1, [0, 0]);
+m1.sendShot(p1, [0, 1]);
+m1.sendShot(p1, [1, 2]);
 
-console.log(m1.toString());
-// console.log(p1.toString());
+console.log(m1.show());

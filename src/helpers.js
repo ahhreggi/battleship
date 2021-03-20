@@ -51,12 +51,9 @@ const attackingMap = (playerMap, enemyBoard, coords) => {
   let hitOrMiss;
   if (target === 0) { // hit
     hitOrMiss = 1;
-    console.log("HIT")
   } else if (target === null) { // miss
     hitOrMiss = 0;
-    console.log("MISS")
   }
-  console.log("OTHER")
   const newMap = copyBoard(playerMap);
   newMap[row][col] = hitOrMiss;
   return newMap;
