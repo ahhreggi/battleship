@@ -7,7 +7,7 @@ const {
   defendingBoard,
   getMap,
   getBoard
-} = require("../helpers");
+} = require("../src/helpers");
 
 describe("generateBoard", () => {
   it("should return an empty erray given n = 0", () => {
