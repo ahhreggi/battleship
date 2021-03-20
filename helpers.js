@@ -97,8 +97,8 @@ const defendingBoard = (playerBoard, coords) => {
 /**
  * Given a player's map, returns a new map with values replaced by strings representing the
  * visual states of each tile.
- *   - Unattacked tile (null) => " "
- *   - Player attack hit (1)  => "X"
+ *   - Unattacked tile (null) => "."
+ *   - Player attack hit (1)  => "H"
  *   - Player attack miss (0) => "-"
  * @param  {Array.<[number|null]>} playerMap - The player's map.
  * @return {Array.<[string]>} - The resulting visual map.
@@ -109,9 +109,9 @@ const getMap = (playerMap) => {
     for (const col in row) {
       let current = visualMap[row][col];
       if (current === null) {
-        visualMap[row][col] = " ";
+        visualMap[row][col] = ".";
       } else if (current) {
-        visualMap[row][col] = "X";
+        visualMap[row][col] = "H";
       } else {
         visualMap[row][col] = "-";
       }
@@ -123,9 +123,9 @@ const getMap = (playerMap) => {
 /**
  * Given a player's board, returns a new board with values replaced by strings representing the
  * visual states of each tile.
- *   - Unattacked tile (null) => " "
- *   - Player ship (0) => "O"
- *   - Enemy attack hit (1) =>   "X"
+ *   - Unattacked tile (null) => "."
+ *   - Player ship (0)        => "O"
+ *   - Enemy attack hit (1)   => "X"
  *   - Enemy attack miss (-1) => "-"
  * @param  {Array.<[number|null]>} playerBoard - The player's board.
  * @return {Array.<[string]>} - The resulting visual board.
@@ -136,7 +136,7 @@ const getBoard = (playerBoard) => {
     for (const col in row) {
       let current = visualBoard[row][col];
       if (current === null) {
-        visualBoard[row][col] = " ";
+        visualBoard[row][col] = ".";
       } else if (current === 0) {
         visualBoard[row][col] = "O";
       } else if (current === 1) {

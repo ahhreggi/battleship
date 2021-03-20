@@ -123,19 +123,19 @@ describe("defendingBoard", () => {
 });
 
 describe("getMap", () => {
-  it("should convert null to ' '", () => {
+  it("should convert null to '.' (unattacked)", () => {
     const playerMap = [[null]];
     const output = getMap(playerMap);
-    const expected = [[" "]];
+    const expected = [["."]];
     assert.deepEqual(output, expected);
   });
-  it("should convert 1 to 'X'", () => {
+  it("should convert 1 to 'H' (player attack hit)", () => {
     const playerMap = [[1]];
     const output = getMap(playerMap);
-    const expected = [["X"]];
+    const expected = [["H"]];
     assert.deepEqual(output, expected);
   });
-  it("should convert 0 to '-'", () => {
+  it("should convert 0 to '-' (player attack miss)", () => {
     const playerMap = [[0]];
     const output = getMap(playerMap);
     const expected = [["-"]];
@@ -144,25 +144,25 @@ describe("getMap", () => {
 });
 
 describe("getBoard", () => {
-  it("should convert null to ' '", () => {
+  it("should convert null to '.' (unattacked)", () => {
     const playerBoard = [[null]];
     const output = getBoard(playerBoard);
-    const expected = [[" "]];
+    const expected = [["."]];
     assert.deepEqual(output, expected);
   });
-  it("should convert 0 to 'O'", () => {
+  it("should convert 0 to 'O' (ship)", () => {
     const playerBoard = [[0]];
     const output = getBoard(playerBoard);
     const expected = [["O"]];
     assert.deepEqual(output, expected);
   });
-  it("should convert 1 to 'X'", () => {
+  it("should convert 1 to 'X' (enemy attack hit)", () => {
     const playerBoard = [[1]];
     const output = getBoard(playerBoard);
     const expected = [["X"]];
     assert.deepEqual(output, expected);
   });
-  it("should convert -1 to '-'", () => {
+  it("should convert -1 to '-' (enemy attack miss)", () => {
     const playerBoard = [[-1]];
     const output = getBoard(playerBoard);
     const expected = [["-"]];
