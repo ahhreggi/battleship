@@ -172,7 +172,7 @@ const boardToStr = (board) => {
   }
   let str = "";
   for (const row of board) {
-    str += `${row.join(" ")}\n`;
+    str += `${row.join("")}\n`;
   }
   return (labels ? " " : "") + str.trim();
 };
