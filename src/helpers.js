@@ -145,8 +145,29 @@ const getBoard = (playerBoard, boardKey = visualKeys.board) => {
  * @param  {Array.<[number|null]>} board - The player's map or board.
  * @return {Array.<[string|number|null]>} - The map or board with coordinates.
  */
-const getLabels = () => {
+const getLabels = (board) => {
+  const newBoard = copyBoard(board);
+  const length = newBoard.length;
+  // Add number labels ("1", "2", "3", ...)
+  const numberLabels = [" "];
+  for (let col = 1; col <= length; col++) {
+    numberLabels.push(col.toString());
+  }
+  newBoard.unshift(numberLabels);
+  // Add letter labels ("A", "B", "C", ...)
+  for (let row = 1; row <= length; row++) {
+    newBoard[row].unshift(String.fromCharCode(row + 64));
+  }
+  return newBoard;
+};
 
+/** Log each row of a board to the console.
+*   @param {Array.<[number|null]>} board - The player's map or board.
+*/
+const printBoard = (board) => {
+  for (const row of board) {
+    console.log(row.join(" "));
+  }
 };
 
 module.exports = {
@@ -156,5 +177,7 @@ module.exports = {
   attackingMap,
   defendingBoard,
   getMap,
-  getBoard
+  getBoard,
+  getLabels,
+  printBoard
 };

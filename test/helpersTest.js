@@ -6,7 +6,9 @@ const {
   attackingMap,
   defendingBoard,
   getMap,
-  getBoard
+  getBoard,
+  getLabels,
+  printBoard
 } = require("../src/helpers");
 
 describe("generateBoard", () => {
@@ -171,28 +173,28 @@ describe("getBoard", () => {
 });
 
 describe("getLabels", () => {
-  it("should return a 3x3 board given a 2x2 board", () => {
-    const board = [
-      [null, null],
-      [null, null]
-    ];
-    const output = getLabels(board);
-    const numRows = output.length;
-    const numCols = output[0].length;
-    const expectedRows = board.length;
-    const expectedCols = board[0].length;
-    assert.deepEqual([numRows, numCols], [expectedRows, expectedCols]);
-  });
+  // it("should return a 3x3 board given a 2x2 board", () => {
+  //   const board = [
+  //     [null, null],
+  //     [null, null]
+  //   ];
+  //   const output = getLabels(board);
+  //   const numRows = output.length;
+  //   const numCols = output[0].length;
+  //   const expectedRows = board.length + 1;
+  //   const expectedCols = board[0].length + 1;
+  //   assert.deepEqual([numRows, numCols], [expectedRows, expectedCols]);
+  // });
   it("should return a board with letters for each row and numbers for each column (except at (0, 0) which should be ' ')", () => {
     const board = [
-      [null, null],
-      [null, null]
+      [".", "."],
+      [".", "."]
     ];
     const output = getLabels(board);
     const expected = [
       [" ", "1", "2"],
-      ["A", null, null],
-      ["B", null, null],
+      ["A", ".", "."],
+      ["B", ".", "."],
     ];
     assert.deepEqual(output, expected);
   });
