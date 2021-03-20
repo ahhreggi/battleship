@@ -59,6 +59,11 @@ class Board extends Grid {
   toString() {
     return boardToStr(getLabels(getBoard(this.grid)));
   }
+
+  // Registers incoming attack.
+  receiveShot(coordinates) {
+    this.grid = defendingBoard(this.grid, coordinates);
+  }
 }
 
 module.exports = { Map, Board };
@@ -69,4 +74,7 @@ p1.addShip([0, 1]); // A 0
 p1.addShip([0, 2]); // A 0
 p1.addShip([0, 3]); // A 0
 p1.addShip([0, 4]); // A 0
-console.log(p1.visual());
+p1.receiveShot([0, 0]);
+p1.receiveShot([1, 0]);
+p1.receiveShot([4, 6]);
+console.log(p1.toString());
