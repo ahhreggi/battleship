@@ -118,4 +118,4 @@ describe("defendingBoard", () => {
     const output = defendingBoard(playerBoard, [0, 0]);
     assert.isFalse(output);
   });
-})
+});

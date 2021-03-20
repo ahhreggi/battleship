@@ -43,7 +43,7 @@ const addShip = (playerBoard, coords) => {
   if (playerBoard[row][col] !== null) {
     return false;
   }
-  const newBoard = playerBoard.map(row => row.slice()); // deep clone
+  const newBoard = copyBoard(playerBoard);
   newBoard[row][col] = 0;
   return newBoard;
 };
@@ -66,7 +66,7 @@ const attackingMap = (playerMap, enemyBoard, coords) => {
   } else { // miss
     hitOrMiss = 0;
   }
-  const newMap = playerMap.map(row => row.slice());
+  const newMap = copyBoard(playerMap);
   newMap[row][col] = hitOrMiss;
   return newMap;
 };
@@ -79,7 +79,17 @@ const attackingMap = (playerMap, enemyBoard, coords) => {
  * @param  {Array.<number, number>} coords - The X and Y coordinates of an incoming attack.
  */
 const defendingBoard = (playerBoard, coords) => {
-
+  const [row, col] = coords;
+  if (playerBoard[row][col] === 1 || playerBoard[row][col] === -1) return false;
+  let hitOrMiss;
+  if (playerBoard[row][col] === 0) {
+    hitOrMiss = 1;
+  } else {
+    hitOrMiss = -1;
+  }
+  const newBoard = copyBoard(playerBoard);
+  newBoard[row][col] = hitOrMiss;
+  return newBoard;
 };
 
 module.exports = {
