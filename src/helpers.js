@@ -161,14 +161,21 @@ const getLabels = (board) => {
   return newBoard;
 };
 
-/** Log each row of a board to the console.
-*   @param {Array.<[string|number|null]>} board - The player's map or board.
-*/
-const printBoard = (board) => {
-  for (const row of board) {
-    console.log(row.join(" "));
+/** Returns a string representation of a board.
+  * @param {Array.<[string|number|null]>} board - The player's map or board.
+  * @param {boolean} labels - Whether or not to include row/column labels.
+  */
+const boardToStr = (board, labels = false) => {
+  let grid = board;
+  if (labels) {
+    grid = this.labeled(board);
   }
-};
+  let str = "";
+  for (const row of grid) {
+    str += `${row.join("")}\n`
+  }
+  return str
+}
 
 module.exports = {
   generateBoard,
@@ -179,5 +186,5 @@ module.exports = {
   getMap,
   getBoard,
   getLabels,
-  printBoard
+  boardToStr
 };
