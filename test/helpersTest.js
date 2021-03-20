@@ -10,6 +10,7 @@ const {
   getLabels,
   boardToStr
 } = require("../src/helpers");
+const visualKeys = require("../src/visualKeys");
 
 describe("generateBoard", () => {
   it("should return an empty erray given n = 0", () => {
@@ -138,31 +139,32 @@ describe("defendingBoard", () => {
 });
 
 describe("getMap", () => {
-  it("should convert null to '.' (unattacked)", () => {
+  const key = visualKeys.map;
+  it(`should convert null to ${key.default} (unattacked)`, () => {
     const playerMap = [
       [null, null],
       [null, null]
     ];
     const output = getMap(playerMap);
     const expected = [
-      [".", "."],
-      [".", "."]
+      [key.default, key.default],
+      [key.default, key.default]
     ];
     assert.deepEqual(output, expected);
   });
-  it("should convert 1 to 'H' (player attack hit)", () => {
+  it(`should convert 1 to ${key.hit} (player attack hit)`, () => {
     const playerMap = [[1]];
     const output = getMap(playerMap);
-    const expected = [["H"]];
+    const expected = [[key.hit]];
     assert.deepEqual(output, expected);
   });
-  it("should convert 0 to '-' (player attack miss)", () => {
+  it(`should convert 0 to ${key.miss} (player attack miss)`, () => {
     const playerMap = [[0]];
     const output = getMap(playerMap);
-    const expected = [["-"]];
+    const expected = [[key.miss]];
     assert.deepEqual(output, expected);
   });
-  it("should not modify the original player map", () => {
+  it(`should not modify the original player map`, () => {
     const playerMap = [[null]];
     getMap(playerMap);
     const expected = [[null]];
