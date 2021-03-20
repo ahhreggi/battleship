@@ -3,7 +3,7 @@ const {
   copyBoard,
   getLabels,
   boardToStr
-} = require("./src/helpers");
+} = require("./helpers");
 
 class Board {
   constructor(size) {
@@ -20,8 +20,8 @@ class Board {
     return getLabels(this.grid);
   }
 
-  toString(labels = false) {
-    return boardToStr(this.grid, labels);
+  toString() {
+    return typeof boardToStr(this.grid);
   }
 
 }
@@ -37,3 +37,6 @@ class Player {
 }
 
 module.exports = Player;
+
+const test = new Board(10);
+console.log(test.toString());

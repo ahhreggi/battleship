@@ -139,9 +139,15 @@ describe("defendingBoard", () => {
 
 describe("getMap", () => {
   it("should convert null to '.' (unattacked)", () => {
-    const playerMap = [[null]];
+    const playerMap = [
+      [null, null],
+      [null, null]
+    ];
     const output = getMap(playerMap);
-    const expected = [["."]];
+    const expected = [
+      [".", "."],
+      [".", "."]
+    ];
     assert.deepEqual(output, expected);
   });
   it("should convert 1 to 'H' (player attack hit)", () => {
@@ -166,9 +172,15 @@ describe("getMap", () => {
 
 describe("getBoard", () => {
   it("should convert null to '.' (unattacked)", () => {
-    const playerBoard = [[null]];
+    const playerBoard = [
+      [null, null],
+      [null, null]
+    ];
     const output = getBoard(playerBoard);
-    const expected = [["."]];
+    const expected = [
+      [".", "."],
+      [".", "."]
+    ];
     assert.deepEqual(output, expected);
   });
   it("should convert 0 to 'O' (ship)", () => {
@@ -217,7 +229,7 @@ describe("getLabels", () => {
     ];
     const output = getLabels(board);
     const expected = [
-      [" ", "1", "2"],
+      [" ", "0", "1"],
       ["A", ".", "."],
       ["B", ".", "."],
     ];
@@ -226,22 +238,13 @@ describe("getLabels", () => {
 });
 
 describe("boardToStr", () => {
-  it("should return the correct string representation of a board without labels", () => {
+  it("should return the correct string representation of a board", () => {
     const board = [
       [".", "."],
       [".", "."],
     ];
     const output = boardToStr(board);
     const expected = "..\n..";
-    assert.equal(output, expected);
-  });
-  it("should return the correct string representation of a board with labels", () => {
-    const board = [
-      [".", "."],
-      [".", "."],
-    ];
-    const output = boardToStr(board, true);
-    const expected = " 12\nA..\nB..";
     assert.equal(output, expected);
   });
 });
