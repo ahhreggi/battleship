@@ -1,17 +1,28 @@
 /**
- * A player sees two boards: their own and a map of their opponent's
+ * Player's map of the opponent's board (starts as null):
+ *   - Unattacked tile (null) => "."
+ *   - Player attack hit (1)  => "H"
+ *   - Player attack miss (0) => "-"
  *
  * Player's board (starts as null with 0s for ship placements):
- *    null = empty space = " "
- *    0 = ship = "O"
- *    1 = enemy attack hit = "X"
- *    -1 = enemy attack miss = "-"
- *
- * Player's map of the opponent's board (starts as null):
- *    null = unattacked tile = " "
- *    1 = player attack hit = "X"
- *    0 = player attack miss = "-"
+ *   - Unattacked tile (null) => "."
+ *   - Player ship (0)        => "O"
+ *   - Enemy attack hit (1)   => "X"
+ *   - Enemy attack miss (-1) => "-"
  */
+const visualKeys = {
+  map: {
+    default: ".",
+    hit: "H",
+    miss: "-"
+  },
+  board: {
+    default: ".",
+    ship: "O",
+    hit: "X",
+    miss: "-"
+  }
+};
 
 /**
  * Returns a 2-dimensional array of null values representing a board with n rows and n columns.
@@ -101,19 +112,20 @@ const defendingBoard = (playerBoard, coords) => {
  *   - Player attack hit (1)  => "H"
  *   - Player attack miss (0) => "-"
  * @param  {Array.<[number|null]>} playerMap - The player's map.
+ * @param  {Object.<string>} mapKey - An object containing characters to represent map tile states.
  * @return {Array.<[string]>} - The resulting visual map.
  */
-const getMap = (playerMap) => {
+const getMap = (playerMap, mapKey = visualKeys.map) => {
   const visualMap = copyBoard(playerMap);
   for (const row in visualMap) {
     for (const col in row) {
       let current = visualMap[row][col];
       if (current === null) {
-        visualMap[row][col] = ".";
-      } else if (current) {
-        visualMap[row][col] = "H";
-      } else {
-        visualMap[row][col] = "-";
+        visualMap[row][col] = mapKey.default;
+      } else if (current === 1) {
+        visualMap[row][col] = mapKey.hit;
+      } else if (current === 0) {
+        visualMap[row][col] = mapKey.miss;
       }
     }
   }
@@ -128,21 +140,22 @@ const getMap = (playerMap) => {
  *   - Enemy attack hit (1)   => "X"
  *   - Enemy attack miss (-1) => "-"
  * @param  {Array.<[number|null]>} playerBoard - The player's board.
+ *  * @param  {Object.<string>} boardKey - An object containing characters to represent board tile states.
  * @return {Array.<[string]>} - The resulting visual board.
  */
-const getBoard = (playerBoard) => {
+const getBoard = (playerBoard, boardKey = visualKeys.board) => {
   const visualBoard = copyBoard(playerBoard);
   for (const row in visualBoard) {
     for (const col in row) {
       let current = visualBoard[row][col];
       if (current === null) {
-        visualBoard[row][col] = ".";
+        visualBoard[row][col] = boardKey.default;
       } else if (current === 0) {
-        visualBoard[row][col] = "O";
+        visualBoard[row][col] = boardKey.ship;
       } else if (current === 1) {
-        visualBoard[row][col] = "X";
+        visualBoard[row][col] = boardKey.hit;
       } else {
-        visualBoard[row][col] = "-";
+        visualBoard[row][col] = boardKey.miss;
       }
     }
   }
