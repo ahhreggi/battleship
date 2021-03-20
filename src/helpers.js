@@ -22,11 +22,11 @@ const copyBoard = (board) => {
  * Given a player's board, returns a new board with given coordinates value set to 0,
  * or false if the existing value is not null (a ship has already been placed there).
  * @param  {Array.<[number|null]>} playerBoard - The player's board.
- * @param  {Array.<number, number>} coords - The X and Y coordinates to add a ship to.
+ * @param  {Array.<number, number>} coordinates - The X and Y coordinates to add a ship to.
  * @return {Array.<[number|null]>|boolean} - The player's resulting board or false if unchanged.
  */
-const addShip = (playerBoard, coords) => {
-  const [row, col] = coords;
+const addShip = (playerBoard, coordinates) => {
+  const [row, col] = coordinates;
   if (playerBoard[row][col] !== null) {
     return false;
   }
@@ -41,11 +41,11 @@ const addShip = (playerBoard, coords) => {
  * Returns false if the coordinate had already been attacked.
  * @param  {Array.<[number|null]>} playerMap - The player's map.
  * @param  {Array.<[number|null]>} enemyBoard - The enemy's board.
- * @param  {Array.<number, number>} coords - The X and Y coordinates to attack.
+ * @param  {Array.<number, number>} coordinates - The X and Y coordinates to attack.
  * @return {Array.<[number|null]>|boolean} - The player's resulting map or false if unchanged.
  */
-const attackingMap = (playerMap, enemyBoard, coords) => {
-  const [row, col] = coords;
+const attackingMap = (playerMap, enemyBoard, coordinates) => {
+  const [row, col] = coordinates;
   if (playerMap[row][col] === 1) return false;
   const target = enemyBoard[row][col];
   let hitOrMiss;
@@ -64,11 +64,11 @@ const attackingMap = (playerMap, enemyBoard, coords) => {
  * incoming attack coordinates has a value of 0 or null, respectively (hit or miss).
  * Returns false if the coordinate had already been attacked.
  * @param  {Array.<[number|null]>} playerBoard - The player's board.
- * @param  {Array.<number, number>} coords - The X and Y coordinates of an incoming attack.
+ * @param  {Array.<number, number>} coordinates - The X and Y coordinates of an incoming attack.
  * @return {Array.<[number|null]>|boolean} - The player's resulting board or false if unchanged.
  */
-const defendingBoard = (playerBoard, coords) => {
-  const [row, col] = coords;
+const defendingBoard = (playerBoard, coordinates) => {
+  const [row, col] = coordinates;
   const target = playerBoard[row][col];
   if (target === 1 || target === -1) return false;
   let hitOrMiss;
