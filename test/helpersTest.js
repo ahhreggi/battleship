@@ -7,8 +7,7 @@ const {
   defendingBoard,
   getMap,
   getBoard,
-  getLabels,
-  printBoard
+  getLabels
 } = require("../src/helpers");
 
 describe("generateBoard", () => {
