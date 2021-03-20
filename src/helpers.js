@@ -94,8 +94,8 @@ const defendingBoard = (playerBoard, coords) => {
  */
 const getMap = (playerMap, mapKey = visualKeys.map) => {
   const visualMap = copyBoard(playerMap);
-  for (const row in visualMap) {
-    for (const col in row) {
+  for (let row = 0; row < visualMap.length; row++) {
+    for (let col = 0; col < visualMap[row].length; col++) {
       let current = visualMap[row][col];
       if (current === null) {
         visualMap[row][col] = mapKey.default;
@@ -122,8 +122,8 @@ const getMap = (playerMap, mapKey = visualKeys.map) => {
  */
 const getBoard = (playerBoard, boardKey = visualKeys.board) => {
   const visualBoard = copyBoard(playerBoard);
-  for (const row in visualBoard) {
-    for (const col in row) {
+  for (let row = 0; row < visualBoard.length; row++) {
+    for (let col = 0; col < visualBoard[row].length; col++) {
       let current = visualBoard[row][col];
       if (current === null) {
         visualBoard[row][col] = boardKey.default;
@@ -148,9 +148,9 @@ const getBoard = (playerBoard, boardKey = visualKeys.board) => {
 const getLabels = (board) => {
   const newBoard = copyBoard(board);
   const length = newBoard.length;
-  // Add number labels ("1", "2", "3", ...)
+  // Add number labels ("0", "1", "2", ...)
   const numberLabels = [" "];
-  for (let col = 1; col <= length; col++) {
+  for (let col = 0; col < length; col++) {
     numberLabels.push(col.toString());
   }
   newBoard.unshift(numberLabels);
@@ -166,12 +166,15 @@ const getLabels = (board) => {
   * @param {string} - The resulting string representation.
   */
 const boardToStr = (board) => {
-  let grid = board;
-  let str = "";
-  for (const row of grid) {
-    str += `${row.join("")}\n`;
+  let labels = false;
+  if (board[0][0] === " ") {
+    labels = true;
   }
-  return str.trim();
+  let str = "";
+  for (const row of board) {
+    str += `${row.join(" ")}\n`;
+  }
+  return (labels ? " " : "") + str.trim();
 };
 
 module.exports = {

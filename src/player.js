@@ -1,9 +1,15 @@
 const {
   generateBoard,
   copyBoard,
+  addShip,
+  attackingMap,
+  defendingBoard,
+  getMap,
+  getBoard,
   getLabels,
   boardToStr
-} = require("./src/helpers");
+} = require("./helpers");
+const visualKeys = require("./visualKeys");
 
 class Board {
   constructor(size) {
@@ -21,9 +27,17 @@ class Board {
   }
 
   toString() {
-    return boardToStr(this.grid);
+    const board = getBoard(getLabels(this.grid))
+    return boardToStr(board);
   }
 
+}
+
+class Map extends Board {
+  toString() {
+    const map = getMap(this.grid)
+    return map
+  }
 }
 
 
@@ -38,5 +52,5 @@ class Player {
 
 module.exports = Player;
 
-const test = new Board(10);
+const test = new Map(10);
 console.log(test.toString());
