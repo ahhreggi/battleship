@@ -1,4 +1,4 @@
-const { generateBoard } = require("./helpers");
+const { generateBoard } = require("../helpers");
 
 class Player {
   constructor(name, boardSize) {
