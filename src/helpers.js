@@ -1,4 +1,4 @@
-const visualKeys = require("./visualKeys");
+const visualKeys = require("./config.json").visualKeys;
 
 /**
  * Returns a 2-dimensional array of null values representing a board with n rows and n columns.
