@@ -1,4 +1,5 @@
 const { assert } = require("chai");
+const visualKeys = require("./config.json").visualKeys;
 const {
   generateBoard,
   copyBoard,
@@ -10,7 +11,6 @@ const {
   getLabels,
   boardToStr
 } = require("../src/helpers");
-const visualKeys = require("../src/visualKeys");
 
 describe("generateBoard", () => {
   it("should return an empty erray given n = 0", () => {

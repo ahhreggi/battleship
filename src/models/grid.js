@@ -5,6 +5,7 @@ const {
 } = require("../helpers");
 
 class Grid {
+
   constructor(size) {
     this.size = size;
     this.grid = generateBoard(size);

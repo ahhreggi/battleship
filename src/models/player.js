@@ -1,10 +1,12 @@
-const { generateBoard } = require("../helpers");
+const Board = require("./board");
+const Map = require("./map");
 
 class Player {
-  constructor(name, boardSize) {
+
+  constructor(name, size) {
     this.name = name;
-    this.board = generateBoard(boardSize);
-    this.map = generateBoard(boardSize);
+    this.board = Board(size);
+    this.map = Map(size);
     this.moves = [];
   }
 }
