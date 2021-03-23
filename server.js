@@ -1,4 +1,6 @@
 require('dotenv').config();
+const { prompt } = require("./utility");
+
 const PORT = process.env.PORT || 3001;
 
 const net = require("net");
