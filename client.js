@@ -1,5 +1,8 @@
-const path = require('path')
-require('dotenv').config({ path: process.cwd() + "/config/config.env" })
+require('dotenv').config();
+const IP = process.env.IP || "localhost";
+const PORT = process.env.PORT || 3001;
+
+
 const net = require("net");
 const stdin = process.stdin;
 stdin.setEncoding("utf8");
