@@ -6,7 +6,12 @@ const visualKeys = require("./config.json").visualKeys;
  * @return {Array.<[null]>} A 2-dimensional n * n array of null values.
  */
 const generateBoard = (n) => {
-  return new Array(n).fill(new Array(n).fill(null));
+  const board = [];
+  for (let i = 0; i < n; i++) {
+    const row = new Array(n).fill(null);
+    board.push(row);
+  };
+  return board;
 };
 
 /**

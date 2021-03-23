@@ -10,7 +10,8 @@ const {
 class Board extends Grid {
 
   constructor(size) {
-    super(size, grid);
+    super(size);
+    this.grid = this.new();
   }
 
   /**
@@ -21,23 +22,31 @@ class Board extends Grid {
    */
   addShip = (coordinates) => {
     const [row, col] = coordinates;
+
     if (this.grid[row][col] !== null) {
+      console.log("Failed to add a ship at", coordinates);
       return false;
     }
     this.grid[row][col] = 0;
+    console.log("Successfully added a ship at", coordinates);
     return true;
   };
 
-  // Returns a visualized map.
-  visual() {
+  // Returns a visualized board.
+  getVisual() {
     return getBoard(this.grid);
   }
 
   // Returns a string representation of the board.
-  show() {
+  toString() {
     return boardToStr(getLabels(getBoard(this.grid)));
   }
 
 }
 
 module.exports = Board;
+
+const board = new Board(3)
+console.log(board.grid);
+const added = board.addShip([1, 1]);
+console.log(board.grid);

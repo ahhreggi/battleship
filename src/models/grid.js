@@ -8,7 +8,7 @@ class Grid {
 
   constructor(size) {
     this.size = size;
-    this.grid = generateBoard(size);
+    this.grid = this.new();
   }
 
   // Returns a deep copy of the grid.
@@ -20,6 +20,12 @@ class Grid {
   labeled() {
     return getLabels(this.grid);
   }
+
+  new() {
+    return generateBoard(this.size);
+  }
+
+
 
 }
 

@@ -8,16 +8,17 @@ const {
 class Map extends Grid {
 
   constructor(size) {
-    super(size, grid);
+    super(size);
+    this.grid = this.new();
   }
 
   // Returns a visualized map.
-  visual() {
+  getVisual() {
     return getMap(this.grid);
   }
 
   // Returns a string representation of the map.
-  show() {
+  toString() {
     return boardToStr(getLabels(getMap(this.grid)));
   }
   
