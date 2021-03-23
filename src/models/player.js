@@ -8,6 +8,7 @@ class Player {
     this.board = new Board(size);
     this.map = new Map(size);
     this.eventLog = [];
+    this.turn = false;
   }
 
   // Registers an outgoing attack.
@@ -90,6 +91,18 @@ class Player {
     console.log(`${this.name}'s board`);
     console.log(this.board.toString());
   }
+
+  // Flip the player's turn status and return it
+  turn() {
+    this.turn = !this.turn;
+    return this.turn;
+  }
+
+  isNext() {
+    return this.turn;
+  }
+
+  
   
 }
 
