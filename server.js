@@ -23,5 +23,5 @@ server.on('connection', (client) => {
 // Server can run only on a specific port
 // Only one server per port
 server.listen(8080, () => {
-  console.log("Server listenining on port 8080");
+  console.log("Server listening on port 8080");
 });
