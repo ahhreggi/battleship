@@ -1,15 +1,14 @@
-require('dotenv').config();
+require('dotenv').config()
 const IP = process.env.IP || "localhost";
 const PORT = process.env.PORT || 3001;
-
 
 const net = require("net");
 const stdin = process.stdin;
 stdin.setEncoding("utf8");
 
 const client = net.createConnection({
-  host: process.env.IP || "localhost",
-  port: process.env.PORT || 3001
+  host: IP,
+  port: PORT
 });
 
 client.setEncoding("utf8");
