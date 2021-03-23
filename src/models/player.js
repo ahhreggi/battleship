@@ -8,7 +8,7 @@ class Player {
     this.name = name;
     this.board = new Board(size);
     this.map = new Map(size);
-    this.history = [];
+    this.eventLog = [];
   }
 
   // Registers an outgoing attack.
@@ -21,24 +21,23 @@ class Player {
     // Otherwise attack the opponent's board at the given coordinates
     const [row, col] = coordinates;
 
-    const target = opponent.getBoard()[row][col];
+    const target = opponent.getBoard().getValue(coordinates);
 
     let hitOrMiss;
-    if (target === 0) { // hit
+    if (target === 0) { // 0 = ship = hit
       hitOrMiss = 1;
-    } else if (target === null) { // miss
+    } else if (target === null) { // null = no ship = miss
       hitOrMiss = 0;
     }
-    const newMap = copyBoard(playerMap);
-    newMap[row][col] = hitOrMiss;
-    return newMap;
-    // Returns a grid on successful execution, or false if invalid move 
-    const result = attackingMap(this.map.get(), opponent.getBoard(), coordinates);
-    const outcome = result ? "hit" : "miss";
-    if (outcome) {
-      this.map.set()
-    }
-    this.log("attack", coordinates);
+
+    // Record the outcome onto the player's map
+    this.map.setValue(coordinates, hitOrMiss);
+
+    // Log the event
+    const outcome = 0 ? "hit" : "miss";
+    this.logEvent("attack", coordinates, outcome); // e.g. player attacked on (0, 1) and it was a miss
+
+    // Record the outcome onto the opponent's board
     opponent.defend(coordinates);
   }
 
@@ -59,12 +58,13 @@ class Player {
   // Logs an event
   // event => attack or defend
   // coordinates => targeted coordinates
-  log(event, coordinates, outcome) {
+  logEvent(event, coordinates, outcome) {
+    // A snapshot of the player's map and board as a result of this event
     const stage = {
       map: this.map,
       board: this.board
     };
-    this.history.push({ event, coordinates, stage, outcome });
+    this.eventLog.push({ event, coordinates, stage, outcome });
   }
 
   addShip(coordinates) {
