@@ -1,20 +1,27 @@
+const Player = require("./models/player");
 const Map = require("./models/map");
 const Board = require("./models/board");
 
-const p1board = new Board(10);
-p1board.addShip([0, 0]);
-p1board.addShip([0, 1]);
-p1board.addShip([0, 2]);
-p1board.addShip([0, 3]);
-p1board.addShip([0, 4]);
 
-const p2map = new Map(10);
-p2map.sendShot(p1board, [0, 0]);
-p2map.sendShot(p1board, [0, 1]);
-p2map.sendShot(p1board, [1, 2]);
-p2map.sendShot(p1board, [1, 6]);
+const size = 5;
 
-console.log("Attacker's MAP\n");
-console.log(p2map.show());
-console.log("\nDefender's BOARD\n");
-console.log(p1board.show());
+const p1 = new Player("P1 Bob", size);
+const p2 = new Player("P2 Ross", size);
+
+// console.log("---P1 BOB-----------------");
+p1.addShip([0, 0]);
+p1.addShip([0, 1]);
+p1.addShip([0, 2]);
+// p1.display();
+// console.log("-----------------------");
+
+// console.log("---P2 ROSS----------------");
+p2.addShip([4, 3]);
+p2.addShip([4, 4]);
+p2.addShip([4, 2]);
+// p2.display();
+// console.log("----------------------");
+
+p2.attack(p1, [2, 2]); // p2 miss
+p1.display();
+p2.display();
