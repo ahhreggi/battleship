@@ -45,8 +45,7 @@ class Player {
   // Returns true if the coordinates mark a tile on the map that the player is allowed to attack.
   // A player can attack a tile only if its value is null.
   isValidTarget(coordinates) {
-    const [row, col] = coordinates;
-    return this.map.get()[row][col] === null;
+    return this.map.getValue(coordinates) === null;
   };
 
   // Registers an incoming attack.
@@ -79,11 +78,11 @@ class Player {
   }
 
   getMap() {
-    return this.map.get();
+    return this.map;
   };
 
   getBoard() {
-    return this.board.get();
+    return this.board;
   };
   
 }

@@ -31,8 +31,14 @@ class Grid {
     return this.grid;
   }
 
-  set(grid) {
-    this.grid = grid;
+  setValue(coordinates, value) {
+    const [row, col] = coordinates;
+    this.grid[row][col] = value;
+  }
+
+  getValue(coordinates) {
+    const [row, col] = coordinates;
+    return this.grid[row][col];
   }
 
 
