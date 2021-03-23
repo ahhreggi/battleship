@@ -9,14 +9,13 @@ class Player {
     this.board = Board(size);
     this.map = Map(size);
     this.eventLog = [];
-    this.eventLog = [];
   }
 
   // Registers an outgoing attack.
   attack(board, coordinates) {
     this.attackLog.push(coordinates);
     this.grid = attackingMap(this.grid, board.grid, coordinates);
-    this.logEvent("attack", coordinates);
+    this.log("attack", coordinates);
 
     board.defend(coordinates);
   }
@@ -25,13 +24,13 @@ class Player {
   defend(coordinates) {
     this.defenseLog.push(coordinates);
     this.board = defendingBoard(this.grid, coordinates);
-    this.logEvent("defend", coordinates);
+    this.log("defend", coordinates);
   }
 
   // Logs an event
   // event => attack or defend
   // coordinates => targeted coordinates
-  logEvent(event, coordinates) {
+  log(event, coordinates) {
     const stage = {
       map: this.map,
       board: this.board
