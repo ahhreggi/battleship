@@ -1,5 +1,7 @@
 const { assert } = require("chai");
-const visualKeys = require("./config.json").visualKeys;
+const visualKeys = require("../src/config.json").visualKeys;
+const Board = require("../src/models/board");
+const Map = require("../src/models/map");
 const {
   generateBoard,
   copyBoard,
