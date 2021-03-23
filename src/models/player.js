@@ -54,11 +54,6 @@ class Player {
     // Set the coordinates to 1 if hit, -1 if miss
     let newValue = outcome === "hit" ? 1 : -1;
     console.log("outcome: ", outcome);
-    if (outcome === "hit") {
-      console.log(`${this.name}: The enemy hit our ship at ${coordinates}`);
-    } else {
-      console.log(`${this.name}: The enemy MISSED at ${coordinates}`);
-    }
     this.board.setValue(coordinates, newValue);
 
     // Log the event
@@ -79,11 +74,6 @@ class Player {
 
   addShip(coordinates) {
     const added = this.board.addShip(coordinates);
-    if (added) {
-      console.log(`${this.name} successfully added a ship to ${coordinates}`);
-    } else {
-      console.log(`${this.name} failed to a ship to ${coordinates}`);
-    }
     return added;
   }
 
