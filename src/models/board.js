@@ -1,6 +1,5 @@
 const Grid = require("./grid");
 const {
-  addShip,
   copyBoard,
   getBoard,
   getLabels,
@@ -40,6 +39,10 @@ class Board extends Grid {
   // Returns a string representation of the board.
   toString() {
     return boardToStr(getLabels(getBoard(this.grid)));
+  }
+
+  set(grid) {
+    this.grid = grid;
   }
 
 }

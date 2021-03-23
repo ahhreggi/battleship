@@ -31,6 +31,10 @@ class Grid {
     return this.grid;
   }
 
+  set(grid) {
+    this.grid = grid;
+  }
+
 
 
 }

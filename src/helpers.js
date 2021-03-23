@@ -168,7 +168,6 @@ const boardToStr = (board) => {
 module.exports = {
   generateBoard,
   copyBoard,
-  addShip,
   attackingMap,
   defendingBoard,
   getMap,

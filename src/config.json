@@ -11,5 +11,18 @@
       "hit": "X",
       "miss": "O"
     }
+  },
+  "stageKeys": {
+    "map": {
+      "default": null,
+      "hit": 1,
+      "miss": 0
+    },
+    "board": {
+      "default": null,
+      "ship": 0,
+      "hit": 1,
+      "miss": -1
+    }
   }
 }
