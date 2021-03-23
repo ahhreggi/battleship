@@ -24,5 +24,14 @@
       "hit": 1,
       "miss": -1
     }
+  },
+  "message" : {
+    "greeting" : "Welcome to Battleship! Players online: ",
+    "joinQueue" : "Joining queue...",
+    "leaveQueue" : "You have left the queue.",
+    "foundOpponent" : "Found an opponent! Enter 'ready' to play!",
+    "waitOpponent" : "Waiting for opponent...",
+    "timeoutOpponent" : "Opponent timed out.",
+    "start" : "Starting game..."
   }
 }
