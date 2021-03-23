@@ -1,6 +1,5 @@
 const Grid = require("./grid");
 const {
-  attackingMap,
   getMap,
   getLabels,
   boardToStr
@@ -8,9 +7,8 @@ const {
 
 class Map extends Grid {
 
-  constructor(size, grid, history) {
-    super(size, grid, history);
-    this.attackLog = [];
+  constructor(size, grid) {
+    super(size, grid);
   }
 
   // Returns a visualized map.
@@ -21,14 +19,6 @@ class Map extends Grid {
   // Returns a string representation of the map.
   show() {
     return boardToStr(getLabels(getMap(this.grid)));
-  }
-
-  // Registers an outgoing attack.
-  sendShot(board, coordinates) {
-    this.attackLog.push(coordinates);
-    this.history.push(this.grid);
-    this.grid = attackingMap(this.grid, board.grid, coordinates);
-    board.receiveShot(coordinates);
   }
   
 }

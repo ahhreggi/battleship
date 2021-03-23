@@ -1,7 +1,6 @@
 const Grid = require("./grid");
 const {
   addShip,
-  defendingBoard,
   getBoard,
   getLabels,
   boardToStr
@@ -9,9 +8,8 @@ const {
 
 class Board extends Grid {
 
-  constructor(size, grid, history) {
-    super(size, grid, history);
-    this.defenseLog = [];
+  constructor(size, grid) {
+    super(size, grid);
   }
 
   // Adds a ship at the given coordinates.
@@ -30,12 +28,6 @@ class Board extends Grid {
     return boardToStr(getLabels(getBoard(this.grid)));
   }
 
-  // Registers incoming attack.
-  receiveShot(coordinates) {
-    this.defenseLog.push(coordinates);
-    this.history.push(this.grid);
-    this.grid = defendingBoard(this.grid, coordinates);
-  }
 }
 
 module.exports = Board;
