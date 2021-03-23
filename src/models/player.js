@@ -6,8 +6,8 @@ class Player {
 
   constructor(name, size) {
     this.name = name;
-    this.board = Board(size);
-    this.map = Map(size);
+    this.board = new Board(size);
+    this.map = new Map(size);
     this.eventLog = [];
   }
 
@@ -37,7 +37,27 @@ class Player {
     };
     this.history.push({ event, coordinates, stage });
   }
+
+  addShip(coordinates) {
+    const added = this.board.addShip(coordinates);
+    if (added) {
+      console.log(`${this.name} successfully added a ship to ${coordinates}`);
+    } else {
+      console.log(`${this.name} failed to a ship to ${coordinates}`);
+    }
+    return added;
+  }
   
 }
 
 module.exports = Player;
+
+const size = 5;
+
+const p1 = new Player("Bob", size);
+const p2 = new Player("Ross", size);
+
+p1.addShip([0, 0]);
+p1.addShip([0, 1]);
+p1.addShip([0, 2]);
+p1.addShip([0, 2]);

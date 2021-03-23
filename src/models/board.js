@@ -45,11 +45,3 @@ class Board extends Grid {
 }
 
 module.exports = Board;
-
-const board = new Board(5)
-const board2 = board.copy();
-board.addShip([0, 1]);
-board.addShip([1, 1]);
-board.addShip([2, 1]);
-console.log(board);
-console.log(board2);
