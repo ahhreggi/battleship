@@ -1,3 +1,4 @@
+require('dotenv').config()
 const net = require("net");
 const stdin = process.stdin;
 stdin.setEncoding("utf8");

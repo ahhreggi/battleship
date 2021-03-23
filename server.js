@@ -1,3 +1,4 @@
+require('dotenv').config()
 const net = require("net");
 const server = net.createServer();
 const users = []; // array of all connections
