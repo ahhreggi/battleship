@@ -43,12 +43,12 @@ describe("copyBoard", () => {
 
 describe("addShip", () => {
   it("should add the ship if there is no existing ship", () => {
-    const board = new Board(3)
+    const board = new Board(3);
     const output = board.addShip([1, 1]);
     assert.isTrue(output);
   });
   it("should return false if a ship already exists there", () => {
-    const board = new Board(3)
+    const board = new Board(3);
     board.addShip([1, 1]);
     const output = board.addShip([1, 1]);
     assert.isFalse(output);

@@ -10,7 +10,7 @@ const generateBoard = (n) => {
   for (let i = 0; i < n; i++) {
     const row = new Array(n).fill(null);
     board.push(row);
-  };
+  }
   return board;
 };
 

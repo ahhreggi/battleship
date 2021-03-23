@@ -19,7 +19,7 @@ class Board extends Grid {
    * @param  {Array.<number, number>} coordinates - The X and Y coordinates to add a ship to.
    * @return {boolean} - Whether or not the ship was added.
    */
-  addShip = (coordinates) => {
+  addShip(coordinates) {
     const [row, col] = coordinates;
 
     if (this.grid[row][col] !== null) {
@@ -29,7 +29,7 @@ class Board extends Grid {
     this.grid[row][col] = 0;
     // console.log("Successfully added a ship at", coordinates);
     return true;
-  };
+  }
 
   // Returns a visualized board.
   getVisual() {
