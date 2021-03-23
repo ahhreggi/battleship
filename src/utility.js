@@ -31,18 +31,19 @@ const msg = {
     client.write(res);
   },
 
-  joinQueue: (client, queue, priority = false) => {
+  joinQueue: (client, queue) => {
     client.status = "queue";
-    if (priority) {
-      queue.unshift(client);
-    } else {
-      queue.push(client);
-    }
-    const num = queue.length;
+    queue.push(client);
+    const num = queue.indexOf(client) + 1;
     let res = cyan("Joining queue...");
     res += cyan(`\nPosition in queue: ${num}`);
     client.write(res);
     console.log(`Client ${client.gameID} joined the queue. (#${num})`);
+
+    if (queue.length > 1) {
+      getNext(queue);
+    }
+
   },
 
   promptReady: (p1, p2, queue) => {
@@ -51,8 +52,10 @@ const msg = {
 
     const res = yellow(`Match found! Enter "${green("READY")}" within 15 seconds to play.`);
 
-    p1.write(res);
-    p2.write(res);
+    setTimeout(() => {
+      p1.write(res);
+      p2.write(res);
+    }, 50);
 
     p1.opponent = p2;
     p2.opponent = p1;
@@ -87,7 +90,7 @@ const msg = {
     client.opponent = null;
     let res = red("Opponent timed out.");
     client.write(res);
-    msg.joinQueue(client, queue, true);
+    msg.joinQueue(client, queue);
   },
 
   gameStarting: (p1, p2) => {
@@ -100,5 +103,10 @@ const msg = {
 
 };
 
+const getNext = (queue) => {
+  const [p1, p2] = queue.splice(0, 2);
+  msg.promptReady(p1, p2, queue);
+};
 
-module.exports = { msg, createUser };
+
+module.exports = { msg, createUser, getNext };

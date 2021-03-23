@@ -1,5 +1,5 @@
 require('dotenv').config();
-const { msg, createUser } = require("./utility");
+const { msg, createUser, getNext } = require("./utility");
 const { red, green, yellow, blue, magenta, cyan } = require("chalk");
 
 const PORT = process.env.PORT || 3001;
@@ -9,9 +9,7 @@ const server = net.createServer();
 
 const users = {};
 const queue = [];
-let players = 0;
-
-// TODO: Whenever someone leaves the queue, message all users in the queue their new position
+let online = 0;
 
 // Event Listeners
 server.on("connection", (client) => {
@@ -20,11 +18,11 @@ server.on("connection", (client) => {
   // Create a new user & log
   const newUser = createUser(client, users);
   users[newUser.gameID] = newUser;
-  players += 1;
+  online += 1;
 
-  msg.greet(client, players);
+  msg.greet(client, online);
 
-  msg.promptPlay(client, players);
+  msg.promptPlay(client, online);
 
   // Process user input
   client.on("data", (data) => {
@@ -35,6 +33,8 @@ server.on("connection", (client) => {
       console.log(client.status);
     } else if (input === "queue") {
       console.log(queue.map(u => u.gameID));
+    } else if (input === "online") {
+      console.log(online);
     }
 
     // Add player to queue if they're in the lobby
@@ -43,8 +43,7 @@ server.on("connection", (client) => {
 
       // If there are 2+ people in queue, remove the next 2 players from queue and prompt them to ready up
       if (queue.length > 1) {
-        const [p1, p2] = queue.splice(0, 2);
-        msg.promptReady(p1, p2, queue);
+        getNext(queue);
       }
 
       // Ready up player if they're waiting to start
@@ -64,7 +63,7 @@ server.on("connection", (client) => {
     // If a client has an opponent waiting, notify them
     const opponent = client.opponent;
     // TODO: if user is playing
-    if (opponent && ["unready", "ready"].includes(opponent.status)) {
+    if (opponent && ["unready", "ready", "playing"].includes(opponent.status)) {
       msg.opponentTimedOut(opponent, queue);
     }
 
@@ -74,6 +73,7 @@ server.on("connection", (client) => {
       queue.splice(queue.indexOf(client), 1);
     }
     console.log(red(`Client #${id} disconnected.`));
+    online -= 1;
   });
 });
 
