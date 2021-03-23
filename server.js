@@ -1,27 +1,25 @@
-const net = require('net');
+const net = require("net");
 const server = net.createServer();
-
-const users = [];
+const users = []; // array of all connections
 
 // Event Listeners
-server.on('connection', (client) => {
-  client.write("Connection established.");
+server.on("connection", (client) => {
+  console.log("Someone has connected!");
+  client.setEncoding("utf8");
   users.push(client);
-
-  // Incoming data from client
-  client.on('data', (clientData) => {
-    client.write("message received:", clientData);
+  client.on("data", (data) => {
+    console.log(data);
+    for (let user of users) {
+      user.write(data);
+    }
   });
-
-  // Client closed connection
-  client.on('close', () => {
-    console.log("Client disconnected");
+  client.on("end", () => {
     users.splice(users.indexOf(client), 1);
   });
 });
 
 // Server can run only on a specific port
 // Only one server per port
-server.listen(8080, () => {
-  console.log("Server listening on port 8080");
+server.listen(3001, () => {
+  console.log("Server is online...");
 });
