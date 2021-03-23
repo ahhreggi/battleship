@@ -43,18 +43,9 @@ describe("copyBoard", () => {
 
 describe("addShip", () => {
   it("should add the ship if the target is null", () => {
-    const board = [
-      [null, null, null],
-      [null, null, null],
-      [null, null, null]
-    ];
+    const board = new Board(3)
     const output = addShip(board, [1, 1]);
-    const expected = [
-      [null, null, null],
-      [null, 0, null],
-      [null, null, null],
-    ];
-    assert.deepEqual(output, expected);
+    assert.isTrue(output, true);
   });
   it("should return false if the target is 0", () => {
     const board = [

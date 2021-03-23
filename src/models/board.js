@@ -9,14 +9,8 @@ const {
 
 class Board extends Grid {
 
-  constructor(size, grid) {
+  constructor(size) {
     super(size, grid);
-  }
-
-  // Adds a ship at the given coordinates.
-  // coordinates = [x, y]
-  addShip(coordinates) {
-    this.grid = addShip(this.grid, coordinates);
   }
 
   /**
@@ -26,13 +20,12 @@ class Board extends Grid {
    * @return {boolean} - Whether or not the ship was added.
    */
   addShip = (coordinates) => {
-    let added = true;
     const [row, col] = coordinates;
     if (this.grid[row][col] !== null) {
-      added = false;
+      return false;
     }
     this.grid[row][col] = 0;
-    return added;
+    return true;
   };
 
   // Returns a visualized map.

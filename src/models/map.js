@@ -7,7 +7,7 @@ const {
 
 class Map extends Grid {
 
-  constructor(size, grid) {
+  constructor(size) {
     super(size, grid);
   }
 
