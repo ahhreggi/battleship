@@ -31,8 +31,13 @@ const msg = {
     client.write(res);
   },
 
-  joinQueue: (client, queue) => {
+  joinQueue: (client, queue, priority = false) => {
     client.status = "queue";
+    if (priority) {
+      queue.unshift(client);
+    } else {
+      queue.push(client);
+    }
     const num = queue.length;
     let res = cyan("Joining queue...");
     res += cyan(`\nPosition in queue: ${num}`);
@@ -40,7 +45,7 @@ const msg = {
     console.log(`Client ${client.gameID} joined the queue. (#${num})`);
   },
 
-  promptReady: (p1, p2) => {
+  promptReady: (p1, p2, queue) => {
     p1.status = "unready";
     p2.status = "unready";
 
@@ -52,44 +57,43 @@ const msg = {
     p1.opponent = p2;
     p2.opponent = p1;
 
-    // Assign the timeout to player 1
+    // Assign a timeout to player 1
     p1.countdown = setTimeout(() => {
-      if (p1.status !== "ready") {
-        msg.timedOut(p1);
-        if (p2.status === "ready") {
-          msg.opponentTimedOut(p2);
-        }
-      }
-      if (p2.status !== "ready") {
-        msg.timedOut(p2);
-        if (p1.status === "ready") {
-          msg.opponentTimedOut(p1);
-        }
-      }
-
       // If both players are ready, start game
       if (p1.status === "ready" && p2.status === "ready") {
         msg.gameStarting(p1, p2);
+      } else if (p1.status === "ready" && p2.status !== "ready") {
+        msg.opponentTimedOut(p1, queue);
+        msg.userTimedOut(p2);
+      } else if (p1.status !== "ready" && p2.status === "ready") {
+        msg.opponentTimedOut(p2, queue);
+        msg.userTimedOut(p1);
+      } else if (p1.status !== "ready" && p2.status !== "ready") {
+        msg.userTimedOut(p1);
+        msg.userTimedOut(p2);
       }
-    }, 8000);
+    }, 15000);
   },
 
   userTimedOut: (client) => {
+    clearTimeout(client.countdown);
     let res = red("Timed out. Returning to lobby...");
     client.write(res);
     msg.promptPlay(client);
   },
   
-  opponentTimedOut: (client) => {
+  opponentTimedOut: (client, queue) => {
+    clearTimeout(client.countdown);
     client.opponent = null;
     let res = red("Opponent timed out.");
     client.write(res);
+    msg.joinQueue(client, queue, true);
   },
 
   gameStarting: (p1, p2) => {
     p1.status = "playing";
     p2.status = "playing";
-    let res = magenta("GAME STARTING!!!!");
+    let res = magenta(`Game starting soon... (${p1.gameID} vs. ${p2.gameID})`);
     p1.write(res);
     p2.write(res);
   }

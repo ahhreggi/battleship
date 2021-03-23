@@ -33,17 +33,18 @@ server.on("connection", (client) => {
     // testing
     if (input === "status") {
       console.log(client.status);
+    } else if (input === "queue") {
+      console.log(queue.map(u => u.gameID));
     }
 
     // Add player to queue if they're in the lobby
     if (input === "play" && client.status === "lobby") {
-      queue.push(client);
       msg.joinQueue(client, queue);
 
       // If there are 2+ people in queue, remove the next 2 players from queue and prompt them to ready up
       if (queue.length > 1) {
         const [p1, p2] = queue.splice(0, 2);
-        msg.promptReady(p1, p2);
+        msg.promptReady(p1, p2, queue);
       }
 
       // Ready up player if they're waiting to start
@@ -57,6 +58,16 @@ server.on("connection", (client) => {
   });
 
   client.on("end", () => {
+
+    // Clear any timeouts
+    clearTimeout(client.countdown);
+    // If a client has an opponent waiting, notify them
+    const opponent = client.opponent;
+    // TODO: if user is playing
+    if (opponent && ["unready", "ready"].includes(opponent.status)) {
+      msg.opponentTimedOut(opponent, queue);
+    }
+
     const id = client.gameID;
     delete users[id];
     if (queue.includes(client)) {
