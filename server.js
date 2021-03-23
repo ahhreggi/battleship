@@ -20,18 +20,27 @@ server.on("connection", (client) => {
   client.gameID = id;
   
   users[id] = client;
-  queue.push(id);
   
   const players = queue.length;
   console.log(`Client #${client.gameID} connected. Players online: ${players}`);
-  client.write(`Welcome to Battleship! Players online: ${players}`);
-  client.write(`Enter "play" to join queue`);
+
+  const welcome = `Welcome to Battleship! Players online: ${players}\nEnter "play" to join the queue.`;
+  client.write(welcome);
 
   client.on("data", (data) => {
     const userInput = data.trim();
     if (userInput === "play") {
       client.write("Joining queue...");
-    };
+      queue.push(id);
+      client.write("Waiting for an opponent...\n")
+      if (queue.length > 1) {
+        const opponent = users[queue[0]];
+        opponent.write("Found an opponent!\n")
+        client.write("Found an opponent!\n");
+      }
+    } else {
+      client.write("Invalid input.");
+    }
   });
 
   client.on("end", () => {
