@@ -3,8 +3,8 @@ const stdin = process.stdin;
 stdin.setEncoding("utf8");
 
 const client = net.createConnection({
-  host: "localhost",
-  port: 3001
+  host: process.env.IP || "localhost",
+  port: process.env.PORT || 3001
 });
 client.setEncoding("utf8");
 
