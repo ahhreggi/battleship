@@ -42,25 +42,16 @@ describe("copyBoard", () => {
 });
 
 describe("addShip", () => {
-  it("should add the ship if the target is null", () => {
+  it("should add the ship if there is no existing ship", () => {
     const board = new Board(3)
-    const output = addShip(board, [1, 1]);
-    assert.isTrue(output, true);
+    const output = board.addShip([1, 1]);
+    assert.isTrue(output);
   });
-  it("should return false if the target is 0", () => {
-    const board = [
-      [null, null, null],
-      [null, 0, null],
-      [null, null, null]
-    ];
-    const output = addShip(board, [1, 1]);
+  it("should return false if a ship already exists there", () => {
+    const board = new Board(3)
+    board.addShip([1, 1]);
+    const output = board.addShip([1, 1]);
     assert.isFalse(output);
-  });
-  it("should not modify the original board", () => {
-    const board = [[null]];
-    addShip(board, [0, 0]);
-    const expected = [[null]];
-    assert.deepEqual(board, expected);
   });
 });
 

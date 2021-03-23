@@ -24,23 +24,6 @@ const copyBoard = (board) => {
 };
 
 /**
- * Given a player's board, returns a new board with given coordinates value set to 0,
- * or false if the existing value is not null (a ship has already been placed there).
- * @param  {Array.<[number|null]>} playerBoard - The player's board.
- * @param  {Array.<number, number>} coordinates - The X and Y coordinates to add a ship to.
- * @return {Array.<[number|null]>|boolean} - The player's resulting board or false if unchanged.
- */
-const addShip = (playerBoard, coordinates) => {
-  const [row, col] = coordinates;
-  if (playerBoard[row][col] !== null) {
-    return false;
-  }
-  const newBoard = copyBoard(playerBoard);
-  newBoard[row][col] = 0;
-  return newBoard;
-};
-
-/**
  * Given a player's map, returns a new map with given coordinates set to 1 or 0 if the
  * same coordinate on the enemy's board has a value of 0 or null, respectively (hit or miss).
  * Returns false if the coordinate had already been attacked.

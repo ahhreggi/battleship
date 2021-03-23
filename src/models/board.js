@@ -24,11 +24,11 @@ class Board extends Grid {
     const [row, col] = coordinates;
 
     if (this.grid[row][col] !== null) {
-      console.log("Failed to add a ship at", coordinates);
+      // console.log("Failed to add a ship at", coordinates);
       return false;
     }
     this.grid[row][col] = 0;
-    console.log("Successfully added a ship at", coordinates);
+    // console.log("Successfully added a ship at", coordinates);
     return true;
   };
 
@@ -46,7 +46,10 @@ class Board extends Grid {
 
 module.exports = Board;
 
-const board = new Board(3)
-console.log(board.grid);
-const added = board.addShip([1, 1]);
-console.log(board.grid);
+const board = new Board(5)
+const board2 = board.copy();
+board.addShip([0, 1]);
+board.addShip([1, 1]);
+board.addShip([2, 1]);
+console.log(board);
+console.log(board2);

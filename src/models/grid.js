@@ -12,8 +12,10 @@ class Grid {
   }
 
   // Returns a deep copy of the grid.
-  deepCopy() {
-    return copyBoard(this.grid);
+  copy() {
+    const copy = new Grid(this.size);
+    copy.grid = copyBoard(this.grid);
+    return copy;
   }
 
   // Returns the grid with coordinate labels.
@@ -23,6 +25,10 @@ class Grid {
 
   new() {
     return generateBoard(this.size);
+  }
+
+  get() {
+    return this.grid;
   }
 
 
